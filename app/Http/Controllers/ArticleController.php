@@ -42,7 +42,6 @@ class ArticleController extends Controller
      */
     public function store(ArticleStoreRequest $request)
     {
-        // dd($encoded);
         if($request->hasFile('thumbnail_image')) {
             $thumbnail_image_path = $this->saveImage('thumbnail_image', $request->file('thumbnail_image'), 1200, 630);
         }
@@ -85,7 +84,11 @@ class ArticleController extends Controller
     public function update(ArticleStoreRequest $request, Article $article)
     {
         if($request->hasFile('thumbnail_image')) {
-            $thumbnail_image_path = $this->updateImage($article->thumbnail_image, 'thumbnail_image', $request->file('thumbnail_image'), 1200, 630);
+            $thumbnail_image_path = '';
+            /**
+             * TODO: enable after fixing below error otherwise image is gonna delete for no reason
+             */
+            // $this->updateImage($article->thumbnail_image, 'thumbnail_image', $request->file('thumbnail_image'), 1200, 630);
         }
 
         $updated_article = $request->user()->articles()->update(array_merge($request->validated(), [

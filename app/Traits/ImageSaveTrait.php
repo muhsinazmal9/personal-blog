@@ -53,7 +53,9 @@ trait ImageSaveTrait
 
             return $return_path;
 
-        } else {
+        }
+        else
+        {
             /**
              * just save it (not recommended)
              */
@@ -103,7 +105,9 @@ trait ImageSaveTrait
 
             File::delete($image_old_attribute);
             return $return_path;
-        } else {
+        }
+        else
+        {
             /**
              * just save it (not recommended)
              */
