@@ -18,7 +18,7 @@
                     Backend Developer! no frontend haha <br>
                     <span class="font-bold">Credential: admin@gmail.com || password</span>
                 </p>
-                <a href="{{ route('about') }}" class="btn btn-outline">About</a>
+                <a href="{{ route('about') }}" class="btn btn-outline">Static About Page</a>
                 <a href="{{ route('login') }}" class="btn btn-primary">Login</a>
             </div>
         </div>

@@ -51,7 +51,7 @@ class ArticleController extends Controller
             'thumbnail_image' => $thumbnail_image_path ?? null,
         ]));
 
-        $article->tags()->attach($request['tags']);
+        $article->tags()->sync($request['tags']);
 
         flash()->addSuccess('Article Created Successfully');
         return redirect()->route('articles.create');
@@ -74,15 +74,28 @@ class ArticleController extends Controller
     {
         return view('article.edit', [
             'article' => $article,
+            'categories' => Category::all(),
+            'tags' => Tag::all(),
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Article $article)
+    public function update(ArticleStoreRequest $request, Article $article)
     {
-        //
+        if($request->hasFile('thumbnail_image')) {
+            $thumbnail_image_path = $this->updateImage($article->thumbnail_image, 'thumbnail_image', $request->file('thumbnail_image'), 1200, 630);
+        }
+
+        $updated_article = $request->user()->articles()->update(array_merge($request->validated(), [
+            'thumbnail_image' => $thumbnail_image_path ?? null,
+        ]));
+
+        $updated_article->tags()->sync($request['tags']);
+
+        flash()->addSuccess('Article Updated Successfully');
+        return redirect()->route('articles.index');
     }
 
     /**

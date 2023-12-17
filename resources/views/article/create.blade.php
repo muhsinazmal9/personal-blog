@@ -28,28 +28,33 @@
                                 </div>
                             @endif
 
-                            <input type="text" placeholder="Enter Article Title" class="input input-bordered" name="title" />
+                            <input type="text" placeholder="Enter Article Title" class="input input-bordered" name="title" value="{{ old('title') }}" />
 
                             <div class="min-w-full prose">
                                 <div class="label">
                                     <span class="label-text">Article Content</span>
                                 </div>
-                                <textarea placeholder="Write Article Content" name="content" id="content" rows="5" class="ck__editor"></textarea>
+                                <textarea placeholder="Write Article Content" name="content" id="content" rows="5" class="ck__editor">{{ old('content') }}</textarea>
                             </div>
 
-                            <input type="file" name="thumbnail_image" class="file-input file-input-bordered" accept="image/*"/>
+                            <label class="form-control w-full">
+                                <div class="label">
+                                    <span class="label-text">Thumbnail / featured image</span>
+                                </div>
+                                <input type="file" name="thumbnail_image" class="file-input file-input-bordered" accept="image/*"/>
+                            </label>
 
                             <select name="category_id" id="select-beast" class="select__single">
                                 <option value="">Select Category</option>
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    <option @selected(old('category_id') == $category->id) value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endforeach
                             </select>
 
                             <select name="tags[]" multiple="multiple" class="select__multiple">
                                 <option value="">Select or create tags</option>
                                 @foreach ($tags as $tag)
-                                    <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                    <option @selected(collect(old('tags'))->contains($tag->id)) value="{{ $tag->id }}">{{ $tag->name }}</option>
                                 @endforeach
                             </select>
 
