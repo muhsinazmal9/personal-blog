@@ -86,11 +86,14 @@ class ArticleController extends Controller
         if($request->hasFile('thumbnail_image')) {
             $thumbnail_image_path = '';
             /**
-             * TODO: enable after fixing below error otherwise image is gonna delete for no reason
+             * TODO: enable and put in the upper var after fixing below error, otherwise previous image is gonna delete for no reason
              */
             // $this->updateImage($article->thumbnail_image, 'thumbnail_image', $request->file('thumbnail_image'), 1200, 630);
         }
 
+        /**
+         * ERROR START
+         */
         $updated_article = $request->user()->articles()->update(array_merge($request->validated(), [
             'thumbnail_image' => $thumbnail_image_path ?? null,
         ]));
