@@ -18,11 +18,11 @@
                     <div class="prose lg:prose-lg">
                         {!! nl2br(__($article->content)) !!}
                     </div>
-                    <div class="card-actions justify-end">
-                        @foreach ($article['tags'] as $tag)
-                            <div class="badge badge-outline badge-primary">{{ $tag->name }}</div>
+                    <div class="card-actions justify-start">
+{{--                         <button class="btn btn-primary">Buy Now</button>--}}
+                        @foreach($article->tags as $tag)
+                                <div class="badge badge-outline badge-primary">{{ $tag->name }}</div>
                         @endforeach
-                        {{-- <button class="btn btn-primary">Buy Now</button> --}}
                     </div>
                 </div>
             </div>
