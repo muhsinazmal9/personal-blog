@@ -32,7 +32,10 @@ class TagController extends Controller
      */
     public function store(TagStoreRequest $request)
     {
-        $request->user()->tags()->create($request->validated());
+        Tag::create($request->validated() + [
+            'user_id' => $request->user()->id,
+        ]);
+
         flash()->addSuccess('Tag created successfully. <a href="'.route('tags.index').'">View all Tags</a>');
         return redirect()->route('tags.create');
     }
@@ -60,7 +63,10 @@ class TagController extends Controller
      */
     public function update(TagStoreRequest $request, Tag $tag)
     {
-        $request->user()->tags()->update($request->validated());
+        $tag->update($request->validated() + [
+            'user_id' => $request->user()->id,
+        ]);
+
         flash()->addSuccess('Tag updated successfully.');
         return redirect()->route('tags.index');
     }

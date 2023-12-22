@@ -32,7 +32,9 @@ class CategoryController extends Controller
      */
     public function store(CategoryStoreRequest $request)
     {
-        $request->user()->categories()->create($request->validated());
+        Category::create($request->validated()+[
+            'user_id' => $request->user()->id,
+        ]);
         flash()->addSuccess('Category created successfully. <a href="'.route('categories.index').'">View all categories</a>');
         return redirect()->route('categories.create');
     }
@@ -58,7 +60,11 @@ class CategoryController extends Controller
      */
     public function update(CategoryStoreRequest $request, Category $category)
     {
-        $request->user()->categories()->update($request->validated());
+
+        $category->update($request->validated() + [
+            'user_id' => $request->user()->id,
+        ]);
+
         flash()->addSuccess('Category updated successfully.');
         return redirect()->route('categories.index');
     }

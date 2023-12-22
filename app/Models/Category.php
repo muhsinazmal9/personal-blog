@@ -14,7 +14,8 @@ class Category extends Model
 
     protected $fillable = [
         'name',
-        'description'
+        'description',
+        'user_id'
     ];
 
     public function user() : BelongsTo

@@ -1,5 +1,0 @@
-# Hey there!
-
-###
-Muhsin Azmal
-###

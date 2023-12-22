@@ -46,9 +46,10 @@ class ArticleController extends Controller
             $thumbnail_image_path = $this->saveImage('thumbnail_image', $request->file('thumbnail_image'), 1200, 630);
         }
 
-        $article = $request->user()->articles()->create(array_merge($request->validated(), [
+        $article = Article::create($request->validated() + [
+            'user_id' => $request->user()->id,
             'thumbnail_image' => $thumbnail_image_path ?? null,
-        ]));
+        ]);
 
         $article->tags()->sync($request['tags']);
 

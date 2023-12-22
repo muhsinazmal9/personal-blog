@@ -13,7 +13,8 @@ class Tag extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'name'
+        'name',
+        'user_id',
     ];
 
     public function user() : BelongsTo
