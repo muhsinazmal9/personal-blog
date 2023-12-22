@@ -20,7 +20,6 @@
                 </p>
                 <a href="{{ route('about') }}" class="btn btn-outline">Static About Page</a>
                 <a href="{{ route('login') }}" class="btn btn-primary">Login</a>
-                <a href="#">Muhsin Azmal</a>
             </div>
         </div>
     </div>
