@@ -118,7 +118,8 @@ trait ImageSaveTrait
         }
     }
 
-    private function deleteImage($path) {
+    private function deleteImage($path)
+    {
         if ($path == null || $path == '') {
             return null;
         }
