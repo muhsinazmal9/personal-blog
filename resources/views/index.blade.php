@@ -19,7 +19,11 @@
                     <span class="font-bold">Credential: admin@gmail.com || password</span>
                 </p>
                 <a href="{{ route('about') }}" class="btn btn-outline">Static About Page</a>
-                <a href="{{ route('login') }}" class="btn btn-primary">Login</a>
+                @guest
+                    <a href="{{ route('login') }}" class="btn btn-primary">Login</a>
+                    @else
+                    <a href="{{ route('dashboard') }}" class="btn btn-primary">Dashboard</a>
+                @endguest
             </div>
         </div>
     </div>
