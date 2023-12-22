@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\File;
  */
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
-use App\Http\Requests\ArticleStoreRequest;
 use Intervention\Image\Encoders\WebpEncoder;
 
 trait ImageSaveTrait
@@ -52,7 +51,6 @@ trait ImageSaveTrait
             $encoded->save(public_path($return_path));
 
             return $return_path;
-
         }
         else
         {

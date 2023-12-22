@@ -16,11 +16,15 @@ class ArticleSeeder extends Seeder
      */
     public function run(): void
     {
-        $articles = Article::factory()->count(10)->create([
-            'user_id' => User::first()->id,
-            'category_id' => Category::first()->id,
-        ]);
-
+        /**
+         ** NOTE: Copied from chatgpt , didn't understand state function
+         */
+        $articles = Article::factory()->count(10)->state(function (array $attributes) {
+            return [
+                'user_id' => User::first()->id,
+                'category_id' => Category::inRandomOrder()->first()->id,
+            ];
+        })->create();
 
         foreach ($articles as $article) {
             $tags = Tag::inRandomOrder()->limit(5)->get();

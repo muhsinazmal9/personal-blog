@@ -45,11 +45,13 @@ class ArticleController extends Controller
         if($request->hasFile('thumbnail_image')) {
             $thumbnail_image_path = $this->saveImage('thumbnail_image', $request->file('thumbnail_image'), 1200, 630);
         }
+        // dd($thumbnail_image_path);
 
-        $article = Article::create($request->validated() + [
-            'user_id' => $request->user()->id,
+
+        $article = Article::create([
             'thumbnail_image' => $thumbnail_image_path ?? null,
-        ]);
+            'user_id' => $request->user()->id,
+        ] + $request->validated());
 
         $article->tags()->sync($request['tags']);
 
@@ -85,21 +87,18 @@ class ArticleController extends Controller
     public function update(ArticleStoreRequest $request, Article $article)
     {
         if($request->hasFile('thumbnail_image')) {
-            $thumbnail_image_path = '';
-            /**
-             * TODO: enable and put in the upper var after fixing below error, otherwise previous image is gonna delete for no reason
-             */
-            // $this->updateImage($article->thumbnail_image, 'thumbnail_image', $request->file('thumbnail_image'), 1200, 630);
+            $thumbnail_image_path = $this->updateImage($article->thumbnail_image, 'thumbnail_image', $request->file('thumbnail_image'), 1200, 630);
         }
 
         /**
          * ERROR START
          */
-        $updated_article = $request->user()->articles()->update(array_merge($request->validated(), [
+        $article->update([
+            'user_id' => $request->user()->id,
             'thumbnail_image' => $thumbnail_image_path ?? null,
-        ]));
+        ] + $request->validated());
 
-        $updated_article->tags()->sync($request['tags']);
+        $article->tags()->sync($request['tags']);
 
         flash()->addSuccess('Article Updated Successfully');
         return redirect()->route('articles.index');
