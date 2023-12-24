@@ -16,7 +16,8 @@
                     <h2 class="card-title">{{ $article->title }}</h2>
                     <div class="badge badge-outline">Category: {{ $article->category->name ?? 'Uncategorized' }}</div>
                     <div class="prose lg:prose-lg">
-                        {!! nl2br(__($article->content)) !!}
+                        {{-- {!! nl2br(__($article->content)) !!} --}}
+                        {!! $article->content !!}
                     </div>
                     <div class="card-actions justify-start">
 {{--                         <button class="btn btn-primary">Buy Now</button>--}}
