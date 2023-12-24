@@ -17,7 +17,7 @@
                     <h1 class="text-center text-xl font-semibold">Update Article</h1>
                     <form action="{{ route('articles.update', $article->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        @method('PUT')
+                        @method('PATCH')
 
                         <div class="mx-auto md:py-0 mt-5 flex flex-col gap-5">
 
@@ -50,7 +50,7 @@
                             <select name="category_id" id="select-beast" class="select__single">
                                 <option value="">Select Category</option>
                                 @foreach ($categories as $category)
-                                    <option @selected(old('category_id', $article->category->id) == $category->id) value="{{ $category->id }}">{{ $category->name }}</option>
+                                    <option @selected(old('category_id', $article->category?->id) == $category->id) value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endforeach
                             </select>
 

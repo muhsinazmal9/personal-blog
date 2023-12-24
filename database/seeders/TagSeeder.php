@@ -14,8 +14,6 @@ class TagSeeder extends Seeder
      */
     public function run(): void
     {
-        Tag::factory()->count(10)->create([
-            'user_id' => User::first()->id,
-        ]);
+        Tag::factory()->count(10)->create();
     }
 }

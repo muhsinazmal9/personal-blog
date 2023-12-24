@@ -24,7 +24,7 @@ class ArticleStoreRequest extends FormRequest
         return [
             'title' => ['required'],
             'content' => ['required'],
-            'category_id' => ['required'],
+            'category_id' => ['nullable'],
             'tags' => ['required'],
             'thumbnail_image' => [
                 'nullable',

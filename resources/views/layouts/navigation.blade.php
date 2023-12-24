@@ -29,7 +29,6 @@
                         {{ __('Tags') }}
                     </x-nav-link>
 
-                    
                 </div>
             </div>
 
@@ -51,6 +50,10 @@
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
+                        </x-dropdown-link>
+
+                        <x-dropdown-link :href="route('about.edit')">
+                            {{ __('About') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->

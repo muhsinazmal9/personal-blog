@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\ProfileInfoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
@@ -11,6 +12,9 @@ Route::get('/', HomeController::class)->name('index');
 Route::view('/about', 'about')->name('about');
 
 Route::group(['middleware' => ['auth', 'verified'] , 'prefix' => 'admin'], function () {
+    /**
+     * Dashboard
+     */
     Route::view('/dashboard', 'dashboard')->name('dashboard');
 
     /**
@@ -20,11 +24,17 @@ Route::group(['middleware' => ['auth', 'verified'] , 'prefix' => 'admin'], funct
     Route::resource('tags', TagController::class)->except('show');
 
     /**
-     * solid resourses
+     * Solid resourses
      */
     Route::resources([
         'articles' => ArticleController::class
     ]);
+
+    /**
+     * About information
+     */
+    Route::get('/profile/about', [ProfileInfoController::class, 'edit'])->name('about.edit');
+    Route::match(['put', 'patch'], '/profile/about', [ProfileInfoController::class, 'update'])->name('about.update');
 
     /**
      * Profile stuffs (came up with breeze)

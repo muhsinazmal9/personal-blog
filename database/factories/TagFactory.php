@@ -19,7 +19,7 @@ class TagFactory extends Factory
     {
         return [
             'name' => fake()->word(),
-            'user_id' => User::factory()
+            'user_id' => User::all()->random()->id
         ];
     }
 }

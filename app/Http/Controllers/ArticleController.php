@@ -90,9 +90,6 @@ class ArticleController extends Controller
             $thumbnail_image_path = $this->updateImage($article->thumbnail_image, 'thumbnail_image', $request->file('thumbnail_image'), 1200, 630);
         }
 
-        /**
-         * ERROR START
-         */
         $article->update([
             'user_id' => $request->user()->id,
             'thumbnail_image' => $thumbnail_image_path ?? null,
@@ -110,7 +107,7 @@ class ArticleController extends Controller
     public function destroy(Article $article)
     {
         $this->deleteImage($article->thumbnail_image);
-        $article->tags()->detach();
+        // $article->tags()->detach();
         $article->delete();
 
         flash()->addSuccess('Article Deleted Successfully');

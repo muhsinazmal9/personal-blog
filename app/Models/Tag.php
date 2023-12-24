@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Tag extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory; //, SoftDeletes;
 
     protected $fillable = [
         'name',

@@ -29,7 +29,7 @@
                                         <th>{{ $loop->iteration }}</th>
                                         <td class="leading-relaxed max-w-xs">{{ $article->title }}
                                             <br>
-                                            <div class="badge bacge-outline">Category: {{ $article->category->name }}</div>
+                                            <div class="badge bacge-outline">Category: {{ $article->category->name ?? 'uncategorized' }}</div>
                                         </td>
 
                                         {{-- content with thumbnail image --}}
@@ -37,7 +37,7 @@
                                             @if ($article->thumbnail_image != null || $article->thumbnail_image != '')
                                                 <img src="{{ asset($article->thumbnail_image) }}" alt="">
                                             @endif
-                                            {!! Str::words($article->content, 3 , '... <a href="'.route('articles.show', $article->id).'" class="link link-primary">Read more</a>') !!}
+                                            {!! Str::words($article->content, 5 , '... <a href="'.route('articles.show', $article->id).'" class="link link-primary">Read more</a>') !!}
                                         </td>
 
                                         <td class="max-w-[100px]">
